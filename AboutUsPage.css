@@ -2,14 +2,9 @@ body {
   background-color: #222730;
   margin: 0px;
 }
-a {
-  text-decoration: none;
-}
-button {
-  border: 0px;
-  text-decoration: none;
-  background-color: white;
-}
+
+.FullWidth{width: 100%;}
+
 .menu {
   margin-top: -5px;
   height: 50px;
@@ -63,78 +58,63 @@ button {
   margin-top: 5px;
   float: right;
 }
-.headerimg {
+.Title{
+  color: #c1b4b4;
+  margin-bottom: 4px;
+}
+
+.Horizontal_Line{
+  height: 2px;
+  background-color: #1f3d6d;
   width: 100%;
 }
-.mainlist {
-  margin-left: 12%;
-  margin-right: 12%;
-  width: 76%;
+.curser{
+  cursor: pointer;
 }
-.alphapetNav {
-  background-color: white;
-  border: 1px solid black;
-  border-radius: 5px;
-  padding: 0px;
-  margin-top: 15px;
-  text-align: center;
+.Details{
+  margin-left: 10%;
+  margin-right: 10%;
+  height: 250px;
+  width:80%;
+  font-size: 20px;
+  margin-top: 30px;
 }
-ul {
-  padding: 0px;
-}
-.letter {
-  list-style-type: none;
+.right {
+  color: #c1b4b4;
+  width: 48%;
+  float: left;
   display: inline-block;
-  text-decoration: none;
-  color: black;
-  width: 26px;
-  padding: 3px 3px;
-  font-size: 18px;
-  margin: 0px 3px;
+  padding: 7px;
 }
-.letter:hover {
-  background-color: black;
-  color: white;
-  border-bottom: 2px solid #0b2b77;
-  margin-bottom: -2px;
+
+.hidden{
+  color: #42f4f4;
+  display: none;
 }
-.activeLetter{
-  background-color: black;
-  color: white;
-  border-bottom: 2px solid #0b2b77;
-  margin-bottom: -2px;
-}
-.letterlist {
-  border: 2px solid white;
-  border-radius: 6px;
-  padding: 8px;
-  margin: 10px 0px;
-  text-align: center;
-  min-height: 400px;
-}
-.movieContainer {
-  position: relative;
+
+.left{
+  float: left;
+  width: 48%;
   display: inline-block;
-  width: 203px;
-  border: 2px solid white;
-  border-radius: 7px;
-  margin: 12px 10px;
-  padding: 4px 8px;
+  padding: 7px;
+  color: #c1b4b4;
 }
-.posterContainer {
-  width: 203px;
-  height: 300px;
-}
-.nameContainer {
+
+
+.FAQText{
   text-align: center;
-  color: white;
+  color: #c1b4b4;
 }
+
+
+
 .footer {
   height: 40px;
   background-color: white;
-  margin-top: 15px;
+  margin-top: 200px;
   width: 100%;
 }
+
 .FooterLeft {
   margin: 7px 15px;
   width: 45%;
@@ -147,23 +127,17 @@ ul {
   width: 50%;
   float: left;
 }
+
 .FooterButtons{
   border-left: 1px solid black;
   color: #222730;
   text-decoration: none;
   padding: 5px;
 }
-.Nonborder{
+
+.Nonborder
+{
   color: #222730;
   text-decoration: none;
   padding: 5px;
-}
-
-.info_title{
-  margin-bottom: 4px;
-}
-.SecondPage{
-  margin-left: 2%;
-  margin-right: 2%;
-  margin-top: 50px;
 }

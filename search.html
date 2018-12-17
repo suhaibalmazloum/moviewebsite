@@ -12,7 +12,7 @@
     </div>
     <div class="menu">
       <a class="menu_items" href="home.html">Home</a>
-      <a class="menu_items activeMenu" href="movielist.html">Movie List</a>
+      <a class="menu_items" href="movielist.html">Movie List</a>
       <a class="menu_items" href="#">Movie News</a>
       <a class="menu_items" href="ContactUs.html">Contact Us</a>
       <a class="menu_items" href="AboutUsPage.html">About Us</a>
@@ -22,36 +22,6 @@
       </div>
     </div>
       <div class="mainlist">
-        <div class="alphapetNav">
-          <ul>
-            <button class="letter activeLetter" type="button" name="button" value="a" id="a">A</button>
-            <button class="letter" type="button" name="button" value="b" id="b">B</button>
-            <button class="letter" type="button" name="button" value="c" id="c">C</button>
-            <button class="letter" type="button" name="button" value="d" id="d">D</button>
-            <button class="letter" type="button" name="button" value="e" id="e">E</button>
-            <button class="letter" type="button" name="button" value="f" id="f">F</button>
-            <button class="letter" type="button" name="button" value="g" id="g">G</button>
-            <button class="letter" type="button" name="button" value="h" id="h">H</button>
-            <button class="letter" type="button" name="button" value="i" id="i">I</button>
-            <button class="letter" type="button" name="button" value="j" id="j">J</button>
-            <button class="letter" type="button" name="button" value="k" id="k">K</button>
-            <button class="letter" type="button" name="button" value="l" id="l">L</button>
-            <button class="letter" type="button" name="button" value="m" id="m">M</button>
-            <button class="letter" type="button" name="button" value="n" id="n">N</button>
-            <button class="letter" type="button" name="button" value="o" id="o">O</button>
-            <button class="letter" type="button" name="button" value="p" id="p">P</button>
-            <button class="letter" type="button" name="button" value="q" id="q">Q</button>
-            <button class="letter" type="button" name="button" value="r" id="r">R</button>
-            <button class="letter" type="button" name="button" value="s" id="s">S</button>
-            <button class="letter" type="button" name="button" value="t" id="t">T</button>
-            <button class="letter" type="button" name="button" value="u" id="u">U</button>
-            <button class="letter" type="button" name="button" value="v" id="v">V</button>
-            <button class="letter" type="button" name="button" value="w" id="w">W</button>
-            <button class="letter" type="button" name="button" value="x" id="x">X</button>
-            <button class="letter" type="button" name="button" value="y" id="y">Y</button>
-            <button class="letter" type="button" name="button" value="z" id="z">Z</button>
-          </ul>
-        </div>
         <div class="letterlist">
 
         </div>
@@ -95,32 +65,26 @@
       var database = firebase.database();
       var movieTemplate = $("#movieContainer").html();
       var droparea = $(".letterlist");
-      var currentLetter = "a";
-      var currentButton = $(".letter");
+      var temp = location.search.substring(1).split("=");
+      var currentSearch = unescape(temp[1]);
+      currentSearch.replace(/%20/g, " ");
       var searchBtn = $("#searchBtn");
       var searchField = $("#searchField");
 
       $(document).ready(function(){
-        dropMovies();
+        dropSearch();
       });
 
-      currentButton.on("click", function(){
-        document.getElementById(currentLetter).classList.remove("activeLetter");
-        currentLetter = $(this).attr("value");
-        document.getElementById(currentLetter).classList.add("activeLetter");
-        droparea.html("");
-        dropMovies();
-      });
 
-      function dropMovies(){
+      function dropSearch(){
         database.ref().child("movies").once("value", function(data){
           $.each(data.val(), function(i, movie){
-            if (movie.movie_title.substring(0, 1).toLowerCase()==currentLetter) {
+            if (movie.movie_title.toLowerCase().includes(currentSearch.toLowerCase())) {
               droparea.append(Mustache.render(movieTemplate, movie));
             }
           });
         });
-        document.title = (currentLetter + "'s list - Movie Masters");
+        document.title = ("Search results for: " + currentSearch + " - Movie Masters");
       };
       searchBtn.on("click", function(){
         var searchUrl = "search.html?search=" + searchField.val();

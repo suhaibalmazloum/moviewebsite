@@ -2,13 +2,8 @@ body {
   background-color: #222730;
   margin: 0px;
 }
-a {
-  text-decoration: none;
-}
-button {
-  border: 0px;
-  text-decoration: none;
-  background-color: white;
+.headerimg {
+  width: 100%;
 }
 .menu {
   margin-top: -5px;
@@ -24,12 +19,6 @@ button {
   text-decoration: none;
 }
 .menu_items:hover {
-  color: #222730;
-  background-color: #a6a8ad;
-  padding-bottom: 13px;
-  border-bottom: 3px solid #0b2b77;
-}
-.activeMenu{
   color: #222730;
   background-color: #a6a8ad;
   padding-bottom: 13px;
@@ -63,72 +52,88 @@ button {
   margin-top: 5px;
   float: right;
 }
-.headerimg {
+.Addmovie {
+  margin-left: 2%;
+  margin-right: 2%;
+  width: 96%;
+}
+.Add_title{
+  margin-bottom: 4px;
+  color: #c1b4b4;
+}
+.Horizontal_Line{
+  height: 2px;
   width: 100%;
+  background-color: #1f3d6d;
 }
-.mainlist {
-  margin-left: 12%;
-  margin-right: 12%;
-  width: 76%;
+.add_movie{
+  margin-top: 40px;
+  margin-left: 15%;
+  margin-right: 15%;
+  width: 70%;
 }
-.alphapetNav {
-  background-color: white;
-  border: 1px solid black;
-  border-radius: 5px;
-  padding: 0px;
-  margin-top: 15px;
+.add_movie label{
+  display: block;
+	margin: 0px 0px 20px 0px;
+}
+.add_movie label > span{
+  width: 100px;
+	font-weight: bold;
+	float: left;
+	padding-top: 8px;
+	padding-right: 5px;
+  color: #EAD5E1;
+}
+.add_movie .input_field{
+  width: 80%;
+	border: 2px solid #C2C2C2;
+	border-radius: 3px;
+	padding: 7px;
+	outline: none;
+}
+.selectContainer{
+  width: 100%;
   text-align: center;
 }
-ul {
-  padding: 0px;
-}
-.letter {
-  list-style-type: none;
+#moviesToEdit {
+  width: 50%;
+	border: 2px solid #C2C2C2;
+	border-radius: 3px;
+	padding: 7px;
+	outline: none;
+  margin-bottom: 30px;
   display: inline-block;
-  text-decoration: none;
-  color: black;
-  width: 26px;
-  padding: 3px 3px;
-  font-size: 18px;
-  margin: 0px 3px;
 }
-.letter:hover {
-  background-color: black;
-  color: white;
-  border-bottom: 2px solid #0b2b77;
-  margin-bottom: -2px;
-}
-.activeLetter{
-  background-color: black;
-  color: white;
-  border-bottom: 2px solid #0b2b77;
-  margin-bottom: -2px;
-}
-.letterlist {
-  border: 2px solid white;
-  border-radius: 6px;
-  padding: 8px;
-  margin: 10px 0px;
+.thanksContainer{
+  width: 100%;
   text-align: center;
-  min-height: 400px;
 }
-.movieContainer {
-  position: relative;
+#thanks {
+  width: 50%;
+  color: white;
+  font-size: 40px;
+	border: 2px solid #C2C2C2;
+	border-radius: 3px;
+	padding: 7px;
+	outline: none;
+  margin-bottom: 30px;
   display: inline-block;
-  width: 203px;
-  border: 2px solid white;
-  border-radius: 7px;
-  margin: 12px 10px;
-  padding: 4px 8px;
 }
-.posterContainer {
-  width: 203px;
-  height: 300px;
+.add_movie .input_field:focus{
+  border: 2px solid #1f3d6d;
 }
-.nameContainer {
-  text-align: center;
-  color: white;
+.add_movie input[type=submit]{
+	border: none;
+	padding: 8px 15px 8px 15px;
+	background: #1f3d6d;
+	color: #fff;
+	border-radius: 3px;
 }
+.add_movie input[type=submit]:hover{
+	background: #4d73af;
+	color: #fff;
+}
+
 .footer {
   height: 40px;
   background-color: white;
@@ -157,13 +162,4 @@ ul {
   color: #222730;
   text-decoration: none;
   padding: 5px;
-}
-
-.info_title{
-  margin-bottom: 4px;
-}
-.SecondPage{
-  margin-left: 2%;
-  margin-right: 2%;
-  margin-top: 50px;
 }

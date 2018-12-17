@@ -2,6 +2,9 @@ body {
   background-color: #222730;
   margin: 0px;
 }
+
+.FullWidth{width: 100%;}
+
 .menu {
   margin-top: -5px;
   height: 50px;
@@ -49,74 +52,55 @@ body {
   margin-top: 5px;
   float: right;
 }
-.headerimg {
+.Details{
+
+  text-align: center;
+  height: 250px;
+  width: 350px;
+  margin: auto;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  font-size: 20px;
+  background-color: #747a87;
+}
+
+.Title{
   width: 100%;
-}
-.poster {
-  float: left;
-  width: 15%;
-  margin-top: 20px;
-}
-.info_details {
-  float: left;
-  width: 85%;
-  height: 300px;
-  display: inline-block;
-  margin-top: 20px;
-}
-.inner_left {
-  float: left;
-  background-color: #505359;
-  margin: 2px 0px;
-  padding: 2px;
-  border-radius: 3px;
-  width: 10%;
-  color: #EAD5E1;
-}
-.inner_right {
-  float: left;
-  display: inline-block;
-  margin: 3px 4px;
-  padding: 3px;
-  width: 85%;
-  color: #EAD5E1;
-}
-.info {
-  margin-left: 2%;
-  margin-right: 2%;
-  width: 96%;
-  height: 350px;
-}
-.line {
-  display: inline-block;
-  margin-left: 15px;
-  width: 100%;
-}
-.player {
-  margin-left: 12%;
-  margin-right: 12%;
-  margin-bottom: 100px;
-  width: 76%;
-  height: 560px;
-}
-.player_area{
-  margin-top: 30px;
-  border: 0px;
-}
-.Horizontal_Line{
-  height: 2px;
-  width: 100%;
-  background-color: #1f3d6d;
-}
-.info_title{
-  margin-bottom: 4px;
   color: #c1b4b4;
+  padding: 5px;
 }
-.SecondPage{
-  margin-left: 2%;
-  margin-right: 2%;
-  margin-top: 50px;
+
+.Labels{
+  width: 100%;
+  color: #EAD5E1;
+  float: left;
 }
+
+.TextField{
+  width: 100%;
+  padding: 5px;
+}
+
+.input_field:focus{
+  border: 2px solid #1f3d6d;
+}
+
+.input_field{
+	border: 2px solid #C2C2C2;
+	border-radius: 3px;
+	padding: 7px;
+	outline: none;
+}
+
+.Submit{
+  margin-top: 10px;
+}
+.button{
+  width: 100px;
+  color: blue;
+}
+
+
 .footer {
   height: 40px;
   background-color: white;

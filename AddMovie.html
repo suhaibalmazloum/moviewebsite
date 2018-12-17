@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="AddMovie.css">
+    <title>Add/Edit Movie - Movie Masters</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  </head>
+  <body>
+
+    <div class="header">
+      <a href="home.html"><img class="headerimg" src="images/fast--furious-6-2013.jpeg" alt=""></a>
+    </div>
+    <div class="menu">
+      <a class="menu_items" href="home.html">Home</a>
+      <a class="menu_items" href="movielist.html">Movie List</a>
+      <a class="menu_items" href="#">Movie News</a>
+      <a class="menu_items" href="ContactUs.html">Contact Us</a>
+      <a class="menu_items" href="AboutUsPage.html">About Us</a>
+      <div class="search">
+        <button id="searchBtn" type="button" name="button"></button>
+        <input id="searchField" type="text" placeholder="Search here" name="" value="">
+      </div>
+    </div>
+
+    <div class="Addmovie">
+      <h1 class="Add_title" >Add new Movie</h1>
+      <div class="Horizontal_Line">
+      </div>
+      <div class="add_movie">
+        <div class="selectContainer">
+          <select id="moviesToEdit" name="moviesToEdit">
+            <option value="New" selected>New</option>
+          </select>
+        </div>
+        <label for="movie_title"><span>Movie title: </span><input type="text" class="input_field" id="movie_title" name="movie_title" value=""></label>
+        <label for="release_date"><span>Release Date: </span><input type="text" class="input_field" id="release_date" name="release_date" value=""></label>
+        <label for="genres"><span>Genres: </span><input type="text" class="input_field" id="genres" name="genres" value=""></label>
+        <label for="imdb_rating"><span>Imdb Rating: </span><input type="text" class="input_field" id="imdb_rating" name="imdb_rating" value=""></label>
+        <label for="age"><span>Age: </span><input type="text" class="input_field" id="age" name="age" value=""></label>
+        <label for="duration"><span>Duration: </span><input type="text" class="input_field" id="duration" name="duration" value=""></label>
+        <label for="language"><span>Language: </span><input type="text" class="input_field" id="language" name="language" value=""></label>
+        <label for="director"><span>Director: </span><input type="text" class="input_field" id="director" name="director" value=""></label>
+        <label for="image_url"><span>Image URL: </span><input type="text" class="input_field" id="image_url" name="director" value=""></label>
+        <label for="video_url"><span>Video URL: </span><input type="text" class="input_field" id="video_url" name="director" value=""></label>
+        <label for="story"><span>Story: </span><textarea class="input_field" id="story" name="story" rows="6"></textarea></label>
+        <label><span> </span><input id="submit" type="submit" value="Submit" /></label>
+      </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyALpeeu3rsisiRBinkKEO7aHYMmscyd5oU",
+        authDomain: "movie-webtech.firebaseapp.com",
+        databaseURL: "https://movie-webtech.firebaseio.com",
+        projectId: "movie-webtech",
+        storageBucket: "movie-webtech.appspot.com",
+        messagingSenderId: "559745020967"
+      };
+      firebase.initializeApp(config);
+    </script>
+    <script type="text/javascript">
+
+      var dropMenue = $("#moviesToEdit");
+      var database = firebase.database();
+      var btn = $("#submit");
+      var datakey = "";
+      var datatime = "";
+      var searchBtn = $("#searchBtn");
+      var searchField = $("#searchField");
+
+
+     // $(document).ready(function(){
+        database.ref().child("movies").once("value", function(data){
+          $.each(data.val(), function(i, movie){
+            dropMenue.append("<option value=\"" + movie.Key + "\">" + movie.movie_title + "</option>");
+          });
+        });
+     // });
+
+
+
+      dropMenue.on("change", function(){
+        if (this.value=="New") {
+          $('#movie_title').val("");
+          $('#release_date').val("");
+          $('#genres').val("");
+          $('#imdb_rating').val("");
+          $('#age').val("");
+          $('#duration').val("");
+          $('#language').val("");
+          $('#director').val("");
+          $('#story').val("");
+          $('#image_url').val("");
+          $('#video_url').val("");
+          datakey = "";
+        }else {
+          database.ref().child("movies/"+this.value).on("value", function(data){
+            thedata = data.val();
+            $('#movie_title').val(thedata.movie_title);
+            $('#release_date').val(thedata.release_date);
+            $('#genres').val(thedata.genres);
+            $('#imdb_rating').val(thedata.imdb_rating);
+            $('#age').val(thedata.age);
+            $('#duration').val(thedata.duration);
+            $('#language').val(thedata.language);
+            $('#director').val(thedata.director);
+            $('#story').val(thedata.story);
+            $('#image_url').val(thedata.image_url);
+            $('#video_url').val(thedata.video_url);
+            datakey = thedata.Key;
+            datatime = thedata.time;
+          });
+        }
+      });
+      btn.on("click", function(){
+
+        //add drop down menu to edit
+        var d = new Date();
+
+        if (datakey=="") {
+          datakey = firebase.database().ref().child('movies').push().key;
+          var newmovie = {
+            Key : datakey,
+            movie_title: $('#movie_title').val(),
+            release_date: $('#release_date').val(),
+            genres: $('#genres').val(),
+            imdb_rating: $('#imdb_rating').val(),
+            age: $('#age').val(),
+            duration: $('#duration').val(),
+            language: $('#language').val(),
+            director: $('#director').val(),
+            story: $('#story').val(),
+            image_url: $('#image_url').val(),
+            video_url: $('#video_url').val(),
+            time: d.getTime()
+          };
+
+          var datawithkey = {};
+          datawithkey[datakey]= newmovie;
+          database.ref('movies').update(datawithkey);
+          $(".add_movie").html("<div class=\"thanksContainer\">  <p id=\"thanks\" >Thank You!</p></div>");
+
+        }else {
+          var newmovie = {
+            Key : datakey,
+            movie_title: $('#movie_title').val(),
+            release_date: $('#release_date').val(),
+            genres: $('#genres').val(),
+            imdb_rating: $('#imdb_rating').val(),
+            age: $('#age').val(),
+            duration: $('#duration').val(),
+            language: $('#language').val(),
+            director: $('#director').val(),
+            story: $('#story').val(),
+            image_url: $('#image_url').val(),
+            video_url: $('#video_url').val(),
+            time: datatime
+          };
+
+          var datawithkey = {};
+          datawithkey[datakey]= newmovie;
+          database.ref('movies').update(datawithkey);
+          $(".add_movie").html("<div class=\"thanksContainer\">  <p id=\"thanks\" >Thank You!</p></div>");
+        }
+
+        //don't forget to edit the thank you page
+
+      });
+      searchBtn.on("click", function(){
+        var searchUrl = "search.html?search=" + searchField.val();
+        document.location.href = searchUrl;
+      });
+    </script>
+
+
+    <div class="footer">
+        <div class="FooterLeft">
+          Copyright @ Suhaib & Muhannad
+        </div>
+        <div class="FooterRight">
+          <a href="LogInPage.html" class="Nonborder">LogInAdmin</a>
+          <a href="ContactUs.html" class="FooterButtons">ContactUs</a>
+          <a href="AboutUsPage.html" class="FooterButtons">AboutUs</a>
+        </div>
+    </div>
+  </body>
+</html>

@@ -1,8 +1,10 @@
 body {
   margin: 0px;
+  overflow-x: hidden;
 }
 a {
   text-decoration: none;
+  color: inherit;
 }
 .backvideo {
   position: absolute;
@@ -52,18 +54,19 @@ a {
 }
 .slidebar {
   position: relative;
-  width: 100%;
+  width: 3920px;
   height: 390px;
   background-color: #222730;
+
 }
 .movieContainer {
-  position: relative;
   display: inline-block;
   width: 203px;
   border: 2px solid white;
   border-radius: 7px;
   margin: 12px 8px;
   padding: 4px 8px;
+  /* animation: scroll 60s infinite linear; */
 }
 .posterContainer {
   width: 203px;
@@ -72,6 +75,9 @@ a {
 .nameContainer {
   text-align: center;
   color: white;
+}
+.slideContainer{
+  height: 390px;
 }
 .next {
   width: 100%;
@@ -110,7 +116,7 @@ a {
   width: 65%;
 }
 .line {
-  display: block;
+  display: inline-block;
   float: left;
   margin-left: 15px;
   width: 100%;
@@ -134,12 +140,31 @@ a {
   margin-bottom: 0px;
 }
 .footer {
-  width: 100%;
   height: 40px;
   background-color: white;
+  margin-top: 15px;
+  width: 100%;
 }
-.footer_first {
-  padding-top: 10px;
-  color: black;
-  text-align: center;
+.FooterLeft {
+  margin: 7px 15px;
+  width: 45%;
+  float: left;
+}
+.FooterRight {
+  text-align: right;
+  margin: 7px 4px;
+  padding: 3px;
+  width: 50%;
+  float: left;
+}
+.FooterButtons{
+  border-left: 1px solid black;
+  color: #222730;
+  text-decoration: none;
+  padding: 5px;
+}
+.Nonborder{
+  color: #222730;
+  text-decoration: none;
+  padding: 5px;
 }
