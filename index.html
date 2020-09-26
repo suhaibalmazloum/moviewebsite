@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Movie Masters</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png" />
+    <link rel="stylesheet" href="home.css">
+  </head>
+  <body>
+    <video muted="muted" autoplay="autoplay" loop="loop" preload="auto" class="backvideo">
+      <source src="https://srv-file10.gofile.io/downloadStore/srv-store4/S0gQZ5/POWERFUL%20-%20Badass%20Action%20Montage.mp4" type="video/mp4">
+    </video>
+    <div class="first">
+      <h1 class="webname" >Movie Masters</h1>
+      <p class="webdisc">Home of Movies</p>
+      <a href="movielist.html"><h6 class="webbutton" >Movies List</h6></a>
+    </div>
+    <div class="second">
+
+    </div>
+    <div class="slidebar">
+      <div class="slideContainer">
+        <template id="slide_template">
+          <div class="movieContainer">
+            <a href="movies.html?movie={{Key}}">
+              <img class="posterContainer" src="{{image_url}}" alt="">
+              <p class="nameContainer" >{{movie_title}}</p>
+            </a>
+          </div>
+        </template>
+      </div>
+    </div>
+
+    <div class="next">
+      <div class="random">
+        <template id="random_template">
+          <a href="movies.html?movie={{Key}}">
+            <div id="{{Key}}" >
+              <img class="randomposter" src="{{image_url}}" >
+              <div class="random_details">
+                <div class="line">
+                  <div class="inner_left">
+                    Movie Title:
+                  </div>
+                  <p class="inner_right">{{movie_title}}</p>
+                </div>
+                <div class="line">
+                  <div class="inner_left">
+                    Release Date:
+                  </div>
+                  <p class="inner_right">{{release_date}}</p>
+                </div>
+                <div class="line">
+                  <div class="inner_left">
+                    Genres:
+                  </div>
+                  <p class="inner_right">{{genres}}</p>
+                </div>
+                <div class="line">
+                  <div class="inner_left">
+                    Imdb Rating:
+                  </div>
+                  <p class="inner_right">{{imdb_rating}}/10</p>
+                </div>
+                <div class="line">
+                  <div class="inner_left">
+                    Age:
+                  </div>
+                  <p class="inner_right">{{age}}</p>
+                </div>
+                <div class="line">
+                  <div class="inner_left">
+                    Duration:
+                  </div>
+                  <p class="inner_right">{{duration}}</p>
+                </div>
+                <div class="line">
+                  <div class="inner_left">
+                    Language:
+                  </div>
+                  <p class="inner_right">{{language}}</p>
+                </div>
+                <div class="line Color">
+                  <div class="inner_left">
+                    Director:
+                  </div>
+                  <p class="inner_right">{{director}}</p>
+                </div>
+                <div class="line">
+                  <div class="inner_left">
+                    Story:
+                  </div>
+                  <p class="inner_right">{{story}}</p>
+                 </div>
+                </div>
+               </div></a>
+        </template>
+      </div>
+      <div class="lastnews">
+        <div class="newsbox">
+          <a href="#"><h4 class="newstitle" >Here is the news title</h4>
+          <p>few lines about news here so you know somthing about it</p></a>
+        </div>
+        <div class="newsbox">
+          <a href="#"><h4 class="newstitle" >Here is the news title</h4>
+          <p>few lines about news here so you know somthing about it</p></a>
+        </div>
+        <div class="newsbox">
+          <a href="#"><h4 class="newstitle" >Here is the news title</h4>
+          <p>few lines about news here so you know somthing about it</p></a>
+        </div>
+      </div>
+<a href="#"></a>
+    </div>
+    <div class="footer">
+        <div class="FooterLeft">
+          Copyright @ Suhaib & Muhannad
+        </div>
+        <div class="FooterRight">
+          <a href="LogInPage.html" class="Nonborder">LogInAdmin</a>
+          <a href="ContactUs.html" class="FooterButtons">ContactUs</a>
+          <a href="AboutUsPage.html" class="FooterButtons">AboutUs</a>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.0.1/mustache.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyALpeeu3rsisiRBinkKEO7aHYMmscyd5oU",
+        authDomain: "movie-webtech.firebaseapp.com",
+        databaseURL: "https://movie-webtech.firebaseio.com",
+        projectId: "movie-webtech",
+        storageBucket: "movie-webtech.appspot.com",
+        messagingSenderId: "559745020967"
+      };
+      firebase.initializeApp(config);
+    </script>
+    <script>
+
+    var randomTemplate = $("#random_template").html();
+    var database = firebase.database();
+    var slideTemplate = $("#slide_template").html();
+    var slideMovies = [];
+
+    database.ref().child("movies").once("value", function(data){
+      var x = Math.floor(Math.random() * (Object.keys(data.val()).length));
+      var z = 0;
+      var top = [];
+      $.each(data.val(), function(i, movie){
+        if (z==x) {
+          $(".random").append(Mustache.render(randomTemplate, movie));
+        }
+        z++;
+        top.push(movie.time);
+      });
+      top.sort(function(a, b){return b - a});
+      $.each(data.val(), function(i, movie){
+        for (var i = 0; i < 10; i++) {
+          if (top[i]==movie.time) {
+            slideMovies.push(movie);
+          }
+        }
+      });
+
+      for (var i = (slideMovies.length-1); i >= 0; i--) {
+        $(".slideContainer").append(Mustache.render(slideTemplate, slideMovies[i]));
+        if (i==0) {
+          for (var j = (slideMovies.length-1); j >= 4; j--) {
+            $(".slideContainer").append(Mustache.render(slideTemplate, slideMovies[j]));
+          }
+        }
+      }
+
+    });
+
+
+
+    $(function() {
+
+      var width = 243;
+      var animationSpeed = 1000;
+      var pause = 3000;
+      var currentSlide = 1;
+      var slideContainer = $('.slideContainer');
+      var interval;
+
+      function startSlider() {
+        interval = setInterval(function() {
+            slideContainer.animate({'margin-left': '-='+width}, animationSpeed, function() {
+                if (++currentSlide === 11) {
+                  currentSlide = 1;
+                  slideContainer.css('margin-left', 0);
+                }
+            });
+        }, pause);
+      }
+      function pauseSlider() {
+        clearInterval(interval);
+      }
+
+      slideContainer.on('mouseenter', pauseSlider).on('mouseleave', startSlider);
+
+      startSlider();
+
+    });
+
+    </script>
+  </body>
+</html>
